@@ -38,10 +38,16 @@ app.get('/api/whoami', function(req, res) {
   // url reference: [https://stackoverflow.com]
   const lang = req.headers['accept-language'];
 
+  // get the user's browser name as well as the name of the operating system behind it
+  // with @Request.headers[user-agent] method to get the value of user-agent property.
+  // thread reference: get the browser (user-agent) name
+  // url reference: [stackoverflow.com]
+  const userAgent = req.headers['user-agent'];
+
   const data = {
     ipadress: ip,
     language: lang,
-    software: null,
+    software: userAgent,
   }
 
   res.json(data);
