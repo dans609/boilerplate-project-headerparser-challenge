@@ -25,12 +25,19 @@ app.get('/api/hello', function (req, res) {
 });
 
 app.get('/api/whoami', function(req, res) {
+  // get user ip address, @req.headers is used if the user have a proxy
+  // @req.socket.remoteAddress is used to get the user remote address
+  // thread reference: get the public IP address of a user connected to the app
+  // url reference: [https://stackoverflow.com] 
+  const ip = req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress
+
   const data = {
-    ipadress: null,
+    ipadress: ip,
     language: null,
     software: null,
   }
-  
+
   res.json(data);
 });
 
