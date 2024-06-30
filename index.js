@@ -32,9 +32,15 @@ app.get('/api/whoami', function(req, res) {
   const ip = req.headers['x-forwarded-for'] ||
     req.socket.remoteAddress
 
+  // get the user's browser language as well as its Relative Quality Factor
+  // with @Request.headers[accept-language] method.
+  // thred reference: get the user browser language in ExpressJS
+  // url reference: [https://stackoverflow.com]
+  const lang = req.headers['accept-language'];
+
   const data = {
     ipadress: ip,
-    language: null,
+    language: lang,
     software: null,
   }
 
